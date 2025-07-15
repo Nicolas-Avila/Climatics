@@ -1,0 +1,5 @@
+# Ignorar .env dentro de back
+/back/.env
+
+# Ignorar node_modules dentro de back
+/back/node_modules/
