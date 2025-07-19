@@ -2,8 +2,7 @@
 import express from "express";
 import cors from "cors";
 import { clothingTemperature } from "../api/IAmodel.js";
-import { obteinWeather } from "../api/weatheIp.js";  // Importar para obtener temp
-
+import { getFullWeatherData } from "../api/weatheIp.js";
 const router = express.Router();
 router.use(cors());
 router.use(express.json());
@@ -26,6 +25,8 @@ router.get("/ropa", async (req, res) => {
 router.get("/clima", async (req, res) => {
   try {
     const respuesta = await getFullWeatherData();
+    console.log("-------********---------")
+    console.log(respuesta)
     res.json({ resultado: respuesta });
   } catch (error) {
     console.error(error);

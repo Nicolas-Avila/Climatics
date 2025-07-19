@@ -1,24 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { TemperatureService } from './service/temperature.service';
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { IonAccordion, IonAccordionGroup, IonItem, IonLabel } from '@ionic/angular/standalone';
+
 @Component({
   selector: 'app-temperature',
   templateUrl: './temperature.component.html',
   styleUrls: ['./temperature.component.scss'],
+  imports: [CommonModule, IonAccordion, IonAccordionGroup, IonItem, IonLabel]
 })
-export class TemperatureComponent  implements OnInit {
+export class TemperatureComponent {
+  @Input() clima: any; // recibe el pronóstico
 
-  constructor(private temperature: TemperatureService) { }
+  constructor() {}
 
-  ngOnInit() {
-    this.temperature.getTemperature().subscribe({
-      next: (res) => {
-        console.log(res)
 
-      },
-      error: (error) => {
-        console.error('Error al obtener recomendación:', error);
-      }
-    });
-  }
-
+  
 }

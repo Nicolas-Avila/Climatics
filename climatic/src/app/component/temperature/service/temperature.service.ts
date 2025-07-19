@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TemperatureService {
-  private apiUrl = 'http://localhost:3000/api';
-
+  // private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = 'http://192.168.1.47:3000/api';
   constructor(private http: HttpClient) {}
 
   getTemperature(): Observable<any> {
