@@ -15,20 +15,18 @@ export class Tab2Page {
   constructor(private temperature: TemperatureService) {}
 
   ionViewWillEnter() {
-    this.clima = null;
-    this.obtenerClima();
-  }
-
-  obtenerClima() {
+    this.clima = null
     this.temperature.getTemperature().subscribe({
       next: (res) => {
-        console.log('Clima actualizado en Tab2Page:', res);
-        this.clima = res.resultado;
+        // console.log('Clima actualizado en Tab2Page:', res);
+        this.clima = res;
+        console.log("aver",this.clima)
       },
       error: (error) => {
         console.error('Error al obtener el clima:', error);
       }
     });
   }
+
 }
 

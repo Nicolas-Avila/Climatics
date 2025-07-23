@@ -1,17 +1,26 @@
-<div *ngIf="!clima">
+<div class="loading" *ngIf="!clima">
   Cargando...
 </div>
 
-<!-- <div *ngIf="clima">
-  <pre>{{ clima | json }}</pre>
-</div> -->
+<div class="container" *ngIf="clima">
+<ion-accordion-group  *ngIf="clima?.resultado?.pronostico_semanal?.length">
 
-
-<ion-accordion-group >
-  <ion-accordion value="first">
-    <ion-item slot="header" color="light">
-      <ion-label>First Accordion</ion-label>
+  <ion-accordion class="card" *ngFor="let dia of clima.resultado.pronostico_semanal" [value]="dia.fecha">
+    <ion-item class="header" slot="header" color="light">
+      <ion-label >
+        {{ dia.diaSemana }} - {{ dia.fecha }}
+      </ion-label>
     </ion-item>
-    <div class="ion-padding" slot="content">First Content</div>
+    
+    <div class="ion-padding" slot="content">
+      <p>Temperatura máxima: {{ dia.temp_max }} °C</p>
+      <p>Temperatura mínima: {{ dia.temp_min }} °C</p>
+      <p>Probabilidad de lluvia: {{ dia.probabilidad_lluvia }}%</p>
+      <p>Índice UV: {{ dia.uv_index_max }} ({{ dia.uv_descripcion }})</p>
+    </div>
   </ion-accordion>
+
 </ion-accordion-group>
+
+
+</div>

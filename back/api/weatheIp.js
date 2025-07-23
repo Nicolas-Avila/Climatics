@@ -32,10 +32,10 @@ export async function getFullWeatherData() {
   const lat = geoData.lat;
   const lon = geoData.lon;
 
-  // Obtener datos climáticos
+  // Obtener datos climáticos incluyendo probabilidad de lluvia
   const weatherRes = await fetch(
     `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}` +
-      `&daily=temperature_2m_max,temperature_2m_min,uv_index_max&timezone=auto`
+      `&daily=temperature_2m_max,temperature_2m_min,uv_index_max,precipitation_probability_max&timezone=auto`
   );
   const weatherData = await weatherRes.json();
   const daily = weatherData.daily;
@@ -49,11 +49,12 @@ export async function getFullWeatherData() {
     return "Extremo";
   }
 
-  // Armar pronóstico
+  // Armar pronóstico con probabilidad de lluvia
   const forecast = daily.time.map((fechaStr, i) => {
     const fecha = new Date(fechaStr + "T12:00:00"); // evita desajuste horario
     const diaSemana = diasSemana[fecha.getDay()];
     const uv = daily.uv_index_max[i];
+    const lluviaProb = daily.precipitation_probability_max[i]; // agrego probabilidad lluvia
 
     return {
       fecha: fechaStr,
@@ -62,6 +63,7 @@ export async function getFullWeatherData() {
       temp_min: daily.temperature_2m_min[i],
       uv_index_max: uv,
       uv_descripcion: descripcionUV(uv),
+      probabilidad_lluvia: lluviaProb, // probabilidad lluvia %
     };
   });
 
@@ -75,3 +77,4 @@ export async function getFullWeatherData() {
     pronostico_semanal: forecast,
   };
 }
+
