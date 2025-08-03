@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">climatic</string>
+    <string name="title_activity_main">climatic</string>
+    <string name="package_name">com.climatic.app</string>
+    <string name="custom_url_scheme">com.climatic.app</string>
+</resources>
